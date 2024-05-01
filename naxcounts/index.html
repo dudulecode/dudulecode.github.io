@@ -69,11 +69,10 @@
             var id = document.querySelectorAll('#channel_id')[0].value;
             // console.log(id)
             window.location.href = "?id=" + id;
+            document.getElementById('warning').style.visibility = 'hidden';
+            document.getElementById('channel_id').style.visibility = 'hidden';
+            document.getElementById('updateSubCountId').style.visibility = 'hidden';
         }
-
-        // document.getElementById('warning').style.visibility = 'hidden';
-        // document.getElementById('channel_id').style.visibility = 'hidden';
-        // document.getElementById('updateSubCountId').style.visibility = 'hidden';
     
         var client = new HttpClient();
         function UpdateSubCount(){
