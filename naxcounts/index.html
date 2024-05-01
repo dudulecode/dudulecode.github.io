@@ -50,7 +50,6 @@
                     if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
                         aCallback(anHttpRequest.responseText);
                 }
-
                 anHttpRequest.open( "GET", aUrl, true );            
                 anHttpRequest.send( null );
             }
@@ -70,12 +69,6 @@
             // console.log(id)
             window.location.href = "?id=" + id;
         }
-    
-        if (c.length < 0) {
-            document.getElementById('warning').style.visibility = 'hidden';
-            document.getElementById('channel_id').style.visibility = 'hidden';
-            document.getElementById('updateSubCountId').style.visibility = 'hidden';
-        }
 
         var client = new HttpClient();
         function UpdateSubCount(){
@@ -84,6 +77,14 @@
                 // console.log(obj['snippet']['handle'])
                 // var newSubcount = Number(obj['estSubCount']).toLocaleString()
                 document.getElementById('odometer').innerHTML = obj['estSubCount'];
+                var url_string = window.location.href; 
+                var url = new URL(url_string);
+                var c = url.searchParams.get("id");
+                if (c.length < 0) {
+                    document.getElementById('warning').style.visibility = 'hidden';
+                    document.getElementById('channel_id').style.visibility = 'hidden';
+                    document.getElementById('updateSubCountId').style.visibility = 'hidden';
+                }
             });
         }
 
