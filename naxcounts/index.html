@@ -71,17 +71,9 @@
             window.location.href = "?id=" + id;
         }
 
-        if (window.location.href == "https://dudulecode.github.io/naxcounts") {
-            document.getElementById('warning').style.visibility = 'visible';
-            document.getElementById('channel_id').style.visibility = 'visible';
-            document.getElementById('updateSubCountId').style.visibility = 'visible';
-            document.getElementById('warning').innerHTML = "To use NaxCounts's custom subcounts, add \"?id=<youtube channel's id>\" in the URL.";
-        }
-
-
-        document.getElementById('warning').style.visibility = 'hidden';
-        document.getElementById('channel_id').style.visibility = 'hidden';
-        document.getElementById('updateSubCountId').style.visibility = 'hidden';
+        // document.getElementById('warning').style.visibility = 'hidden';
+        // document.getElementById('channel_id').style.visibility = 'hidden';
+        // document.getElementById('updateSubCountId').style.visibility = 'hidden';
     
         var client = new HttpClient();
         function UpdateSubCount(){
