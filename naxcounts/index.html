@@ -1,1 +1,76 @@
-<h1>hello !</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NaxCounts</title>
+
+    <!-- css/js files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-minimal.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+</head>
+<body>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #00ff00;
+        }
+
+        .odometer {
+            color: white;
+            font-family: Roboto, sans-serif;
+            font-weight: 700;
+            font-size: 100px;
+        }
+
+        .text {
+            color: white;
+            font-family: Roboto;
+        }      
+    </style>
+
+    <div id="odometer" class="odometer">Subcount is updating...</div>
+
+    <script type="text/javascript">
+        var HttpClient = function() {
+            this.get = function(aUrl, aCallback) {
+                var anHttpRequest = new XMLHttpRequest();
+                anHttpRequest.onreadystatechange = function() { 
+                    if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                        aCallback(anHttpRequest.responseText);
+                }
+
+                anHttpRequest.open( "GET", aUrl, true );            
+                anHttpRequest.send( null );
+            }
+        }
+
+        function digits(n) {
+          return Array.from(String(n), Number);
+        }
+
+        var url_string = window.location.href; 
+        var url = new URL(url_string);
+        var c = url.searchParams.get("id");
+        console.log(c);
+
+        var client = new HttpClient();
+        function UpdateSubCount(){
+            client.get('https://nia-statistics.com/api/get?platform=youtube&type=channel&id=' + c, function(response) {
+                const obj = JSON.parse(response);
+                // console.log(obj['snippet']['handle'])
+                // var newSubcount = Number(obj['estSubCount']).toLocaleString()
+                document.getElementById('odometer').innerHTML = obj['estSubCount'];
+            });
+        }
+
+        var intervalId = window.setInterval(function(){
+            UpdateSubCount()
+        }, 1000);
+    </script>
+</body>
+</html>
